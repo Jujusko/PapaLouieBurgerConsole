@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PapaLouieBurgerLogic.Ingredients
 {
+    /// <summary>
+    /// Типы колтлеты для бургера на выбор
+    /// </summary>
     public enum PattyType
     {
         Beef,
@@ -14,12 +17,23 @@ namespace PapaLouieBurgerLogic.Ingredients
         Fish,
         Falafel
     }
+
+    /// <summary>
+    /// Класс котлеты как ингредиента
+    /// </summary>
     public class BurgerPatty : Ingredient
     {
+        /// <summary>
+        /// Приватная переменная для работы с get;set; у PattyType
+        /// </summary>
         private PattyType _type;
         public PattyType PattyType
         {
             get { return _type; }
+
+            /// <summary>
+            /// Здесь настраивается информация о цене, весе и энергетической ценности котлеты в зависимости от её типа 
+            /// </summary>
             set
             {
                 _type = value;
@@ -51,12 +65,18 @@ namespace PapaLouieBurgerLogic.Ingredients
                         Ccal = 333.0;
                         break;
                     default:
-                        throw new ArgumentException("Unknown type");
+                        throw new ArgumentException("Неизвестный тип ингрединта"); // Ошибка для случая, когда тип котлеты не был выбран
                 }
 
             }
 
         }       
+        /// <summary>
+        /// Конструктор для создания котлеты для бургера
+        /// </summary>
+        /// <param name="batch">Номер партии продукта</param>
+        /// <param name="release">Дата выпуска продукта</param>
+        /// <param name="pattyType">Тип котлеты для бургера</param>
         public BurgerPatty(int batch, DateOnly release, PattyType pattyType) : base(batch, release)
         {
             PattyType = pattyType;

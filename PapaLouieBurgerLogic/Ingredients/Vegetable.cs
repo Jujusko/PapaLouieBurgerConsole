@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PapaLouieBurgerLogic.Ingredients
 {
+    /// <summary>
+    /// Типы овоща для бургера на выбор
+    /// </summary>
     public enum VegType
     {
         Onion,
@@ -15,13 +18,22 @@ namespace PapaLouieBurgerLogic.Ingredients
         Pickles,
         Paprika
     }
+    /// <summary>
+    /// Класс овоща на выбор какингредиента
+    /// </summary>
     public class Vegetable : Ingredient
     {
-        private VegType _type { get; set; }
+        /// <summary>
+        /// Приватная переменная для работы с get;set; у VegType
+        /// </summary>
+        private VegType _type;
         public VegType VegType
         {
             get { return _type; }
 
+            /// <summary>
+            /// Здесь настраивается информация о цене, весе и энергетической ценности овоща в зависимости от его типа 
+            /// </summary>
             set
             {
                 _type = value;
@@ -58,10 +70,16 @@ namespace PapaLouieBurgerLogic.Ingredients
                         Ccal = 20.0;
                         break;
                     default:
-                        throw new ArgumentException("Unknown type");
+                        throw new ArgumentException("Неизвестный тип ингрединта"); // Ошибка для случая, когда тип овоща не был выбран
                 }
             }
         }
+        /// <summary>
+        /// Конструктор для создания овоща 
+        /// </summary>
+        /// <param name="batch">Номер партии продукта</param>
+        /// <param name="release">Дата выпуска продукта</param>
+        /// <param name="type">Тип овоща</param>
         public Vegetable(int batch, DateOnly release, VegType type) : base(batch, release)
         {
 
