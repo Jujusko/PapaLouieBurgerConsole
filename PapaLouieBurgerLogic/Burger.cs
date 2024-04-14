@@ -37,6 +37,16 @@ namespace PapaLouieBurgerLogic
             Ingredients = ingredients;
         }
 
+        private void CalculateBurgerParams()
+        {
+            foreach(var ingredient in Ingredients)
+            {
+                //суммируем стоимость
+                //суммируем вес
+                //суммируем калории
+            }
+        }
+
     }
 
 }

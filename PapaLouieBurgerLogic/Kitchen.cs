@@ -18,9 +18,15 @@ namespace PapaLouieBurgerLogic
         public static Burger NewBurger(List<Ingredient> Ingredients)
         {
 
+            Validated(Ingredients);
+            var newIngridients = Sort(Ingredients);
 
+            var burger = new Burger(newIngridients);
 
-            return new Burger();
+            //TODO: gesoria написать метод для подсчёта общего количества калорий бургера, его стоимости и веса
+            //TODO: gesoria подумать, как сделать вывод данных (через вывод в консоль или формировать какой-нибудь чек...) )
+
+            return burger;
         }
 
 
@@ -107,8 +113,15 @@ namespace PapaLouieBurgerLogic
 
             List<Ingredient> newlist = new List<Ingredient>(oldlist.Count); // Создание пустого списка для ингредиентов, выложенных в правильном порядке                      
 
-            newlist[0] = oldlist.Find(x => x is BotBun); // Перемещение нижней булочки в начало нового списка ингредиентов
-            newlist[oldlist.Count - 1] = oldlist.Find(x => x is TopBun); // Перемещение верхей булочки в конец нового списка ингредиентов
+            var botBun = oldlist.Find(x => x is BotBun);
+            var topBun = oldlist.Find(x => x is TopBun);
+            //newlist.Add(botBun);
+            //Добавление первого элемента
+            newlist.Insert(0, botBun);
+            //newlist[0] = new BotBun(1, botBun.ReleaseDate, BunType.ClassicBun); // Перемещение нижней булочки в начало нового списка ингредиентов
+            //newlist[oldlist.Count - 1] = oldlist.Find(x => x is TopBun); // Перемещение верхей булочки в конец нового списка ингредиентов
+
+
 
             oldlist.Remove(oldlist.Find(x => x is BotBun)); // Удаление нижней булочки из старого списка ингредиентов
             oldlist.Remove(oldlist.Find(x => x is TopBun)); // Удаление верхней булочки из старого списка ингредиентов
@@ -117,7 +130,7 @@ namespace PapaLouieBurgerLogic
 
             if (sauces.Count == 1) // Если соус присутствует в количестве 1 шт., то он помещается поверх нижней булочки
             {
-                newlist[1] = sauces[0];
+                newlist.Insert(1, sauces[0]);
             }
             else if (sauces.Count == 2)
             {
@@ -127,20 +140,14 @@ namespace PapaLouieBurgerLogic
 
             foreach (var everysauce in sauces) // Удаление соусов из старого списка
             {
-                oldlist.Remove(everysauce); 
+                oldlist.Remove(everysauce);
             }
 
-            for (int i = 0; i < ; i++)
+            //В будущем добавим сортировку
+            //TODO: gesoria
+            foreach(var eachIngr in oldlist)
             {
-
-
-
-
-
-
-
-
-
+                newlist.Add(eachIngr);
             }
 
 
@@ -160,15 +167,13 @@ namespace PapaLouieBurgerLogic
 
 
 
+            //TODO: gesoria если не нужно, то можем удалить
+            //var sauce = oldlist.Where(x => x is Sauce).Count();
+            //if (sauce == 2)
+            //{
+            //    newlist[1] = oldlist.Find(x => x is Sauce);
 
-            var sauce = oldlist.Where(x => x is Sauce).Count();
-            if (sauce == 2)
-            {
-                newlist[1] = oldlist.Find(x => x is Sauce);
-
-            }
-
-
+            //}
 
 
 
@@ -178,30 +183,14 @@ namespace PapaLouieBurgerLogic
 
 
 
+            newlist.Add(topBun);
 
-            return 0;
+
+        
+            return newlist;
         }
 
 
 
     }
 }
-//    public class Medvedsi4
-//    {
-//        public string Name { get; set; }
-
-//        public Medvedsi4(string name)
-//        {
-//            Name = name;
-//        }
-//    }
-
-//    public static class NoraMedvedsi4ej
-//    {
-//        public static Medvedsi4 BornMedvedsi4(string hisName)
-//        {
-//            Medvedsi4 newChild = new Medvedsi4(hisName);
-//            return newChild;
-//        }
-//    }
-//}
